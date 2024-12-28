@@ -9,13 +9,18 @@ const extensions=[
 
 const content =``
 
-const Tiptap = () => {
+const Tiptap = ({onEditorContentSave}) => {
     const editor = useEditor({
         extensions,
         content
     })
     if(!editor){
         return null
+    }
+    const handleEditorContent=()=>{
+        const html = editor.getHTML()
+       // console.log(html);
+       onEditorContentSave(html)
     }
   return (
     <div>
@@ -107,7 +112,7 @@ const Tiptap = () => {
             <EditorContent editor={editor}></EditorContent>
 
         </div>
-<button>Save</button>
+<button onClick={handleEditorContent}>Save</button>
     </div>
   )
 }
